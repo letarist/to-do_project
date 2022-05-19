@@ -1,0 +1,7 @@
+/venv
+README.md
+/.idea
+/.pyc
+/users/__pycache__/
+/authors/__pycache__/
+/todoproject/__pycache__/
