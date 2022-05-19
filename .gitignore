@@ -1,8 +1,5 @@
 /venv
 README.md
-db.sqlite3
-users/migrations
-authors/migrations
 /.idea
 /.pyc
 /users/__pycache__/
