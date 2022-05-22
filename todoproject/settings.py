@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'authors',
+    'to_do_list',
     'users',
 ]
 
