@@ -19,6 +19,7 @@ from rest_framework.routers import DefaultRouter
 from authors.views import AuthorModelViewSet
 from to_do_list.views import ProjectViewSet, ToDoViewSet
 from users.views import UserModelViewSet
+# from to_do_list.views import ListToDo
 
 router = DefaultRouter()
 router.register('authors', AuthorModelViewSet)
@@ -29,5 +30,7 @@ router.register('to_do', ToDoViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    # path('one_to_do/<int:pk>/', ListToDo.as_view()),
+    # path('to_do_del/<int:pk>/', DestroyToDo.as_view({'get': 'destroy'})),
 ]
