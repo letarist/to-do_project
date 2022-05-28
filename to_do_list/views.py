@@ -30,17 +30,18 @@ class ToDoPagination(LimitOffsetPagination):
 
 
 class ToDoViewSet(ModelViewSet):
+    # renderer_classes = JSONRenderer
     queryset = ToDo.objects.all()
     serializer_class = ToDoModelSerializer
     pagination_class = ToDoPagination
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ToDoFilter
 
-    # def destroy(self, request, pk=None, *args, **kwargs):
-    #     queryset = get_object_or_404(ToDo, pk=pk)
-    #     queryset.is_active = False
-    #     queryset.save()
-    #     return Response(status=204)
+    def destroy(self, request, pk=None, *args, **kwargs):
+        queryset = get_object_or_404(ToDo, pk=pk)
+        queryset.is_active = False
+        queryset.save()
+        return Response(status=204)
 
 
 
