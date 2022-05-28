@@ -13,7 +13,7 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
 
 class ToDoModelSerializer(HyperlinkedModelSerializer):
     # users = StringRelatedField()  # опционально
-    # project = ProjectModelSerializer()  # опционально
+    project = StringRelatedField()  # опционально
 
     class Meta:
         model = ToDo
