@@ -2,6 +2,6 @@
 README.md
 /.idea
 /.pyc
-/users/__pycache__/
-/authors/__pycache__/
-/todoproject/__pycache__/
+__pycache__/
+build/
+node_modules/
