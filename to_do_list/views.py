@@ -11,6 +11,8 @@ from .serializers import ProjectModelSerializer, ToDoModelSerializer
 from .models import Project, ToDo
 from .filters import ProjectFilter, ToDoFilter
 
+HTTP_204_NO_CONTENT = 204
+
 
 class ProjectPagination(LimitOffsetPagination):
     default_limit = 10
@@ -30,7 +32,7 @@ class ToDoPagination(LimitOffsetPagination):
 
 
 class ToDoViewSet(ModelViewSet):
-    # renderer_classes = JSONRenderer
+    # renderer_classes = [JSONRenderer]  # обязательно указывать в списке
     queryset = ToDo.objects.all()
     serializer_class = ToDoModelSerializer
     pagination_class = ToDoPagination
@@ -39,11 +41,10 @@ class ToDoViewSet(ModelViewSet):
 
     def destroy(self, request, pk=None, *args, **kwargs):
         queryset = get_object_or_404(ToDo, pk=pk)
+        serializer = ToDoModelSerializer(queryset)
         queryset.is_active = False
         queryset.save()
-        return Response(status=204)
-
-
+        return Response(serializer.data, status=HTTP_204_NO_CONTENT)
 
 # class ListToDo(RetrieveAPIView):
 #     queryset = ToDo.objects.all()
