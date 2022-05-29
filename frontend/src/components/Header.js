@@ -1,10 +1,23 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
-const Header = () =>{
-    return(
+const Header = () => {
+    return (
         <header>
-      <h1>Тренировка Django rest framework</h1>
-    </header>
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/">Пользователи</Link>
+                    </li>
+                    <li>
+                        <Link to="/projects">Проекты</Link>
+                    </li>
+                    <li>
+                        <Link to="/to_do">Задачи</Link>
+                    </li>
+                </ul>
+            </nav>
+        </header>
     )
 }
 
