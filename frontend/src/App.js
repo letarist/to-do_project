@@ -6,8 +6,9 @@ import Header from "./components/Header";
 import axios from 'axios';
 import Footer from "./components/Footer";
 import ProjectList from "./components/Project";
+import OneProjectList from "./components/oneProject";
 import ToDoList from "./components/ToDo";
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Link, Route, Routes, useParams} from "react-router-dom";
 import style from "./styles/style.css"
 
 
@@ -18,7 +19,8 @@ class App extends React.Component {
             'authors': [],
             'users': [],
             'projects': [],
-            'todoes': []
+            'todoes': [],
+            'OneProject': [],
         }
     }
 
@@ -52,6 +54,14 @@ class App extends React.Component {
                     'todoes': todoes,
                 })
             })
+        axios.get(`http://localhost:8000/api/project/1/`)
+            .then(response => {
+                const OneProject = response.data
+                this.setState({
+                    'OneProject': OneProject,
+                })
+
+            })
 
     }
 
@@ -65,11 +75,13 @@ class App extends React.Component {
                     <div class="header-center">
                         <Header/>
                     </div>
-                    <div class={"table-center"}>
+                    <div class="table-center">
                         <Routes>
                             <Route path='/' element={<UserList users={this.state.users}/>}/>
-                            <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>
-                            <Route path='to_do' element={<ToDoList todoes={this.state.todoes}/>}/>
+                            <Route path='/project' element={<ProjectList projects={this.state.projects}/>}/>
+                            <Route path='/to_do' element={<ToDoList todoes={this.state.todoes}/>}/>
+                            <Route path={`/projects/1/`}
+                                   element={<OneProjectList OneProject={this.state.OneProject}/>}/>
                         </Routes>
                     </div>
 
@@ -79,7 +91,8 @@ class App extends React.Component {
 
                 </BrowserRouter>
             </div>
-            </body>)
+            </body>
+        )
     }
 
 }

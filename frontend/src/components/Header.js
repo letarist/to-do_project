@@ -10,7 +10,7 @@ const Header = () => {
                         <Link to="/">Пользователи</Link>
                     </li>
                     <li>
-                        <Link to="/projects">Проекты</Link>
+                        <Link to="/project">Проекты</Link>
                     </li>
                     <li>
                         <Link to="/to_do">Задачи</Link>
