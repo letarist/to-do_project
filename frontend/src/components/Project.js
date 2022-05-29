@@ -1,9 +1,11 @@
 import React from "react";
+import {Link, useParams} from "react-router-dom";
+
 
 const ProjectItem = ({project})=>{
     return(<tr>
         <td>
-            {project.title}
+            <Link key={project.id} to={`/projects/${project.id}/`}>{project.title}</Link>
         </td>
         <td>
             {project.directory_link}
