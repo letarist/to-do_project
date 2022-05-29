@@ -1,7 +1,8 @@
 import React from "react";
+import {Route, Router} from "react-router-dom";
 
-const UserItem = ({user})=>{
-    return(<tr>
+const UserItem = ({user}) => {
+    return (<tr>
         <td>
             {user.nickname}
         </td>
@@ -19,24 +20,28 @@ const UserItem = ({user})=>{
 }
 
 const UserList = ({users}) => {
-    return(
+    return (
         <table>
+
             <th>
                 Nick name
             </th>
+
             <th>
                 First name
             </th>
 
             <th>
-                Last_name
+                Last name
             </th>
 
             <th>
                 Email
             </th>
-            {users.map((user) => <UserItem user={user}/> )}
+
+            {users.map((user) => <UserItem user={user}/>)}
         </table>
+
     )
 }
 export default UserList
