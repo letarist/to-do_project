@@ -11,7 +11,7 @@ const ProjectItem = ({project})=>{
             {project.directory_link}
         </td>
         <td>
-            {project.users}
+            {project.users.join(", ")}
         </td>
     </tr>
     )
@@ -32,4 +32,5 @@ const ProjectList = ({projects})=>{
         </table>
     )
 }
+
 export default ProjectList
