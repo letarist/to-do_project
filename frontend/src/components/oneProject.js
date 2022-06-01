@@ -1,5 +1,11 @@
 import React from "react";
-const OneProjectList = ({OneProject})=>{
+import { useParams } from "react-router-dom";
+const OneProjectList = ({projects})=>{
+    let {id} = useParams()
+    let project = projects.filter(project => project.id === +id);
+    if (project.length){
+        project=project[0]
+    }
     return(
                 <table>
             <th>
@@ -9,17 +15,17 @@ const OneProjectList = ({OneProject})=>{
                 Ссылка на репозиторий
             </th>
             <th>
-                ссылки на участников
+                id участников
             </th>
             <tr>
         <td>
-            {OneProject.title}
+            {project.title}
         </td>
         <td>
-            {OneProject.directory_link}
+            {project.directory_link}
         </td>
         <td>
-            {OneProject.users}
+            {project.users.join(", ")}
         </td>
     </tr>
         </table>

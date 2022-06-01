@@ -16,23 +16,14 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'authors': [],
             'users': [],
             'projects': [],
             'todoes': [],
-            'OneProject': [],
+            'OneProject': [],   
         }
     }
-
-    componentDidMount() {
-        axios.get('http://localhost:8000/api/authors')
-            .then(response => {
-                const authors = response.data
-                this.setState({
-                    'authors': authors,
-                })
-            })
-        axios.get('http://localhost:8000/api/users')
+    loadUser(url){
+            axios.get(`${url}`)
             .then(response => {
                 const users = response.data
                 this.setState({
@@ -40,30 +31,33 @@ class App extends React.Component {
                 })
             })
             .catch(error => console.log(error))
-        axios.get('http://localhost:8000/api/project')
+    }
+    loadProjects(url){
+            axios.get(`${url}`)
             .then(response => {
                 const projects = response.data.results
                 this.setState({
                     'projects': projects,
                 })
             })
-        axios.get('http://localhost:8000/api/to_do')
+            .catch(error => console.log(error))
+    }
+    loadToDo(url){
+            axios.get(`${url}`)
             .then(response => {
                 const todoes = response.data.results
                 this.setState({
                     'todoes': todoes,
                 })
             })
-        axios.get(`http://localhost:8000/api/project/1/`)
-            .then(response => {
-                const OneProject = response.data
-                this.setState({
-                    'OneProject': OneProject,
-                })
-
-            })
-
+            .catch(error => console.log(error))
     }
+    
+    componentDidMount(){
+               this.loadUser('http://localhost:8000/api/users');
+               this.loadProjects('http://localhost:8000/api/project');
+               this.loadToDo('http://localhost:8000/api/to_do');
+            };
 
 
     render() {
@@ -80,8 +74,8 @@ class App extends React.Component {
                             <Route path='/' element={<UserList users={this.state.users}/>}/>
                             <Route path='/project' element={<ProjectList projects={this.state.projects}/>}/>
                             <Route path='/to_do' element={<ToDoList todoes={this.state.todoes}/>}/>
-                            <Route path={`/projects/1/`}
-                                   element={<OneProjectList OneProject={this.state.OneProject}/>}/>
+                            <Route path={'/projects/:id/'}
+                                   element={<OneProjectList projects={this.state.projects}/>}/>
                         </Routes>
                     </div>
 
