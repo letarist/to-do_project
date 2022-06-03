@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.generics import RetrieveAPIView
@@ -33,6 +34,7 @@ class ToDoPagination(LimitOffsetPagination):
 
 class ToDoViewSet(ModelViewSet):
     # renderer_classes = [JSONRenderer]  # обязательно указывать в списке
+    # permission_classes = [AllowAny] # без ограничений на вьюху
     queryset = ToDo.objects.all()
     serializer_class = ToDoModelSerializer
     pagination_class = ToDoPagination
