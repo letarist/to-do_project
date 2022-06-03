@@ -32,7 +32,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
-    path('autorization/', views.obtain_auth_token)
+    path('autorization/', views.obtain_auth_token),
     # path('one_to_do/<int:pk>/', ListToDo.as_view()),
     # path('to_do_del/<int:pk>/', DestroyToDo.as_view({'get': 'destroy'})),
 ]
