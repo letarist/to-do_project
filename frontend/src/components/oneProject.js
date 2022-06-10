@@ -4,7 +4,7 @@ const OneProjectList = ({projects})=>{
     let {id} = useParams()
     let project = projects.filter(project => project.id === +id);
     if (project.length){
-        project=project[0]
+        project=project[0]  
     }
     return(
                 <table>
