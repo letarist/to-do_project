@@ -8,6 +8,8 @@ class User(models.Model):
     age = models.PositiveSmallIntegerField()
     email = models.CharField(max_length=70, unique=True, blank=True)
     profession = models.CharField(max_length=50)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     def __str__(self):
         return self.last_name

@@ -14,13 +14,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
 from authors.views import AuthorModelViewSet
 from to_do_list.views import ProjectViewSet, ToDoViewSet
 from users.views import UserModelViewSet
 from rest_framework.authtoken import views
-# from to_do_list.views import ListToDo
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema = get_schema_view(
+    openapi.Info(
+        title='to_do_project',
+        default_version='1.0',
+        description='I hate react)00)',
+        contact=openapi.Contact(name='Дмитрий', email='pentegov_92@mail.ru'),
+        license=openapi.License(name='NoFrontendCorp')
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
+)
 
 router = DefaultRouter()
 router.register('authors', AuthorModelViewSet)
@@ -33,6 +47,13 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     path('autorization/', views.obtain_auth_token),
-    # path('one_to_do/<int:pk>/', ListToDo.as_view()),
-    # path('to_do_del/<int:pk>/', DestroyToDo.as_view({'get': 'destroy'})),
+    # re_path(r'^api/(?P<version>\d\.\d)/users/$', UserModelViewSet.as_view({'get': 'list'})),
+    path('api/user/1.0/', include("users.urls", namespace='1.0')),
+    path('api/user/2.0/', include("users.urls", namespace='2.0')),
+    # re_path(r'^swagger(?P<format>\.json|\.yaml)$',
+    #         schema.without_ui)
+
+    path('api/docs/', schema.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui', ),
+    re_path('api/docs/swagger(?P<format>\.json|\.yaml)$', schema.without_ui(cache_timeout=0), name='json_format'),
+    path('api/docs/redoc/', schema.with_ui('redoc', cache_timeout=0), name='schema-redoc-ui', ),
 ]

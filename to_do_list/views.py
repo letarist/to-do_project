@@ -48,16 +48,3 @@ class ToDoViewSet(ModelViewSet):
         queryset.save()
         return Response(serializer.data, status=HTTP_204_NO_CONTENT)
 
-# class ListToDo(RetrieveAPIView):
-#     queryset = ToDo.objects.all()
-#     serializer_class = ToDoModelSerializer
-
-# class DestroyToDo(ModelViewSet):
-#     serializer_class = ToDoModelSerializer
-#     queryset = ToDo.objects.all()
-#
-#     def destroy(self, request, *args, **kwargs):
-#         queryset = self.get_object()
-#         queryset.is_active = False
-#         queryset.save()
-#         return Response(status=204)
