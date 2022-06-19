@@ -23,6 +23,7 @@ from users.views import UserModelViewSet
 from rest_framework.authtoken import views
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from graphene_django.views import GraphQLView
 
 schema = get_schema_view(
     openapi.Info(
@@ -56,4 +57,5 @@ urlpatterns = [
     path('api/docs/', schema.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui', ),
     re_path('api/docs/swagger(?P<format>\.json|\.yaml)$', schema.without_ui(cache_timeout=0), name='json_format'),
     path('api/docs/redoc/', schema.with_ui('redoc', cache_timeout=0), name='schema-redoc-ui', ),
+    path('graph/', GraphQLView.as_view(graphiql=True)),
 ]
