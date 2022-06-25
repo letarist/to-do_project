@@ -6,7 +6,7 @@ from users.models import User
 class Project(models.Model):
     title = models.CharField(verbose_name='Название', max_length=100)
     directory_link = models.URLField(verbose_name='Ссылка на директорию', default=uuid.uuid4())
-    users = models.ManyToManyField(User)
+    users = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

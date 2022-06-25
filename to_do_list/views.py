@@ -5,7 +5,8 @@ from rest_framework.generics import RetrieveAPIView
 from rest_framework.renderers import JSONRenderer, CoreJSONRenderer
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from rest_framework.mixins import DestroyModelMixin
+from rest_framework.mixins import DestroyModelMixin, CreateModelMixin, UpdateModelMixin, ListModelMixin, \
+    RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import ProjectModelSerializer, ToDoModelSerializer
@@ -47,4 +48,3 @@ class ToDoViewSet(ModelViewSet):
         queryset.is_active = False
         queryset.save()
         return Response(serializer.data, status=HTTP_204_NO_CONTENT)
-

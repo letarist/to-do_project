@@ -25,7 +25,7 @@ const OneProjectList = ({projects})=>{
             {project.directory_link}
         </td>
         <td>
-            {project.users.join(", ")}
+            {project.users}
         </td>
     </tr>
         </table>
