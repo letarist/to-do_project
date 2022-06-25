@@ -2,7 +2,7 @@ from django.db import models
 
 
 class User(models.Model):
-    nickname = models.CharField(max_length=30, default='Pepega')
+    nickname = models.CharField(max_length=30)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=70)
     age = models.PositiveSmallIntegerField()
